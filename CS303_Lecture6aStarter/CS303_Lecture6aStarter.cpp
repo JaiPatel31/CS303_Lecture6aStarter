@@ -50,26 +50,31 @@ int main() {
     try {
         myIterator::iterator<std::string> newListIter(tomD);
 
-        std::cout << "\nPRINTING CURRENT LIST\n";
-        newListIter = tomD;
+        std::cout << "\nPRINTING CURRENT LIST USING POSTFIX\n";
         while (!(newListIter == nullptr)) {
             std::cout << *newListIter << "\n";
             newListIter++;
         }
 
+        std::cout << "\nPRINTING CURRENT LIST USING PREFIX\n";
+        newListIter = tomD;
+        while (!(newListIter == nullptr)) {
+            std::cout << *newListIter << "\n";
+            ++newListIter;
+        }
+
         std::cout << "\nCHANGING 2ND NAME TO BUBBA WUBBA\n";
         newListIter = tomD;
-        std::cout << *newListIter << "\n";
-        newListIter++;
+        ++newListIter;
 
         std::string* newData = newListIter.operator->();
         *newData = "Bubba Wubba";
 
-        std::cout << "\nPRINTING CURRENT LIST\n";
+        std::cout << "\nPRINTING CURRENT LIST WITH UPDATED NAME\n";
         newListIter = tomD;
         while (!(newListIter == nullptr)) {
             std::cout << *newListIter << "\n";
-            newListIter++;
+            ++newListIter;
         }
 
         std::cout << "\nDEMONSTRATING PRE & POSTFIX OPERATORS\n";
@@ -86,6 +91,15 @@ int main() {
         while (!(newListIter == nullptr)) {
             std::cout << *newListIter << "\n";
             newListIter++;
+        }
+
+
+        myIterator::const_iterator<std::string> newListIter2(tomD);
+
+        std::cout << "\nUSING CONST_ITERATOR CLASS\n";
+        while (!(newListIter2 == nullptr)) {
+            std::cout << *newListIter2 << "\n";
+            newListIter2++;
         }
     }
     catch (std::invalid_argument& err) {
