@@ -21,6 +21,10 @@ namespace myIterator {
 			return current == rhs.current;
 		}
 
+
+		bool operator!=(const iterator& rhs) const {
+			return current != rhs.current;
+		}
 		//PRE:  None
 		//POST: Verifies that the current pointer is valid. 
 		//      Returns a reference to the data field in the node that it points to
@@ -80,7 +84,10 @@ namespace myIterator {
 		iterator& operator--() {
 			std::cout << "prefix operator --\n";
 			//if (current->prev == nullptr)   // no prior elements
- 
+			if (current->prev == nullptr) {
+				throw std::invalid_argument("Attempt to go back past head()")
+			}
+			current = current->prev;
 			//else
  
 			return *this;
@@ -95,7 +102,7 @@ namespace myIterator {
 		iterator  operator--(int) {
 			std::cout << "postfix operator --\n";
 			// Make a copy of the current value.
- 
+			
 			// Move self backward.
  
 			// Return old value.
