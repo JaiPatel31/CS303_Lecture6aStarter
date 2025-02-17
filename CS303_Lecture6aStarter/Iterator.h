@@ -84,8 +84,8 @@ namespace myIterator {
 		iterator& operator--() {
 			std::cout << "prefix operator --\n";
 			//if (current->prev == nullptr)   // no prior elements
-			if (current->prev == nullptr) {
-				throw std::invalid_argument("Attempt to go back past head()")
+			if (current->prev == nullptr || current == nullptr) {
+				throw std::invalid_argument("Attempt to go back past head()");
 			}
 			current = current->prev;
 			//else
@@ -102,11 +102,11 @@ namespace myIterator {
 		iterator  operator--(int) {
 			std::cout << "postfix operator --\n";
 			// Make a copy of the current value.
-			
+			iterator return_value = *this; 
 			// Move self backward.
- 
+			--(*this);
 			// Return old value.
-			return *this;			  // Return the value prior to decrement
+			return return_value;			  // Return the value prior to decrement
 		}
 
 	};
@@ -188,9 +188,11 @@ namespace myIterator {
 		const_iterator& operator--() {
 			std::cout << "prefix operator --\n";
 			//if (current->prev == nullptr)   // no prior elements
-
+			if (current->prev == nullptr) {
+				throw std::invalid_argument("Attempt to go back too far");
+			}
 			//else
-
+			current = current->prev;
 			return *this;
 		}
 
@@ -203,11 +205,11 @@ namespace myIterator {
 		const_iterator  operator--(int) {
 			std::cout << "postfix operator --\n";
 			// Make a copy of the current value.
-
+			const_iterator returnValue = *this;
 			// Move self backward.
-
+			--(*this);
 			// Return old value.
-			return *this;			  // Return the value prior to decrement
+			return returnValue;			  // Return the value prior to decrement
 		}
 
 	};
